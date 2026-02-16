@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ax viral24</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-black text-white font-sans overflow-hidden">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-zinc-900 h-14 flex items-center justify-between px-4 border-b border-zinc-800">
+      <div class="flex items-center gap-4">
+        <button id="mobile-menu-btn" class="p-2 hover:bg-zinc-800 rounded-full lg:hidden">
+          <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <a href="#/" class="flex items-center gap-1" title="Ax viral24 Home">
+          <span class="font-bold text-2xl tracking-tighter text-white">Ax</span>
+          <span class="font-bold text-2xl tracking-tighter bg-orange-500 text-black px-1 rounded-md">viral24</span>
+        </a>
+      </div>
+      <div class="hidden md:flex flex-1 max-w-2xl mx-4">
+        <div class="flex w-full">
+          <input type="text" placeholder="Search" class="w-full bg-black border border-zinc-700 text-white rounded-l-md px-4 py-2 focus:border-orange-500 focus:outline-none" />
+          <button class="bg-zinc-800 border border-l-0 border-zinc-700 rounded-r-md px-5 hover:bg-zinc-700">
+            <svg class="h-5 w-5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 sm:gap-4">
+        <a href="#/upload" class="p-2 hover:bg-zinc-800 rounded-full">
+          <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/><path d="M12 11h.01"/></svg>
+        </a>
+        <div class="h-8 w-8 bg-orange-500 rounded-full flex items-center justify-center text-black font-bold cursor-pointer">A</div>
+      </div>
+    </header>
+
+    <div class="flex pt-14 h-screen">
+      <!-- Mobile Backdrop -->
+      <div id="mobile-backdrop" class="fixed inset-0 bg-black/80 z-30 hidden lg:hidden"></div>
+
+      <!-- Sidebar -->
+      <aside id="sidebar" class="fixed left-0 top-14 bottom-0 bg-zinc-900 w-64 overflow-y-auto px-3 py-4 transition-transform duration-300 z-40 border-r border-zinc-800 -translate-x-full lg:translate-x-0">
+        <div class="space-y-1 border-b border-zinc-800 pb-4 mb-4">
+          <a href="#/" class="sidebar-link flex items-center gap-5 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-zinc-400 hover:bg-zinc-800 hover:text-white">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Home</span>
+          </a>
+          <a href="#/photos" class="sidebar-link flex items-center gap-5 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-zinc-400 hover:bg-zinc-800 hover:text-white">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            <span>Photos</span>
+          </a>
+        </div>
+        <div class="space-y-1 border-b border-zinc-800 pb-4 mb-4">
+          <h3 class="px-3 py-2 text-base font-semibold text-zinc-400">You</h3>
+          <a href="#/upload" class="sidebar-link flex items-center gap-5 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-zinc-400 hover:bg-zinc-800 hover:text-white">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>Upload</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="app" class="flex-1 p-4 sm:p-6 transition-all duration-300 w-full lg:ml-64 overflow-y-auto">
+        
+        <!-- Home View -->
+        <div id="home-view" class="hidden">
+          <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sticky top-0 bg-black z-10 py-2 mb-4">
+            <button class="px-3 py-1.5 rounded-full text-sm font-bold whitespace-nowrap bg-orange-500 text-black">All</button>
+            <button class="px-3 py-1.5 rounded-full text-sm font-bold whitespace-nowrap bg-zinc-800 text-white hover:bg-zinc-700">Recommended</button>
+          </div>
+          <div id="home-grid" class="grid grid-cols-1 gap-y-6 sm:gap-y-8 max-w-4xl mx-auto"></div>
+        </div>
+
+        <!-- Photos View -->
+        <div id="photos-view" class="hidden">
+          <h2 class="text-2xl font-bold mb-6">Photos</h2>
+          <div id="photos-grid" class="grid grid-cols-1 gap-y-6 sm:gap-y-8 max-w-4xl mx-auto"></div>
+        </div>
+
+        <!-- Upload View -->
+        <div id="upload-view" class="hidden flex items-center justify-center min-h-[80vh]">
+          
+          <!-- PIN Form -->
+          <div id="pin-form" class="bg-zinc-900 p-8 rounded-lg shadow-md max-w-sm w-full border border-zinc-800">
+            <h2 class="text-xl font-bold text-white mb-4 text-center">Admin Access</h2>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-zinc-400">Enter PIN</label>
+                <input type="password" id="pin-input" class="mt-1 block w-full rounded-md bg-black border-zinc-700 text-white p-2 border focus:border-orange-500 focus:outline-none" placeholder="PIN">
+              </div>
+              <button id="pin-submit" class="w-full py-2 px-4 rounded-md font-bold text-black bg-orange-500 hover:bg-orange-600">Access</button>
+            </div>
+          </div>
+
+          <!-- Upload Form -->
+          <div id="upload-form" class="hidden w-full max-w-xl bg-zinc-900 rounded-lg p-6 border border-zinc-800">
+            <div class="border-b border-zinc-800 pb-5 mb-5">
+              <h3 class="text-lg font-bold text-white">Upload Media</h3>
+            </div>
+            
+            <div class="flex gap-4 mb-4 justify-center">
+              <button id="upload-video-btn" class="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-full font-medium border border-zinc-700">
+                <svg class="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/><path d="M12 11h.01"/></svg>
+                Upload Video
+              </button>
+              <button id="upload-photo-btn" class="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-full font-medium border border-zinc-700">
+                <svg class="h-5 w-5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                Upload Photo
+              </button>
+            </div>
+
+            <div id="drop-zone" class="border-2 border-dashed border-zinc-700 rounded-lg p-12 text-center hover:bg-black transition-colors cursor-pointer relative">
+              <input type="file" id="file-input" class="hidden">
+              
+              <div id="drop-message" class="space-y-1">
+                <div class="mx-auto h-12 w-12 text-zinc-500 flex justify-center items-center">
+                  <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </div>
+                <div class="text-sm text-zinc-400">Select file or drag and drop</div>
+                <p class="text-xs text-zinc-500">Max 500MB</p>
+              </div>
+
+              <div id="file-preview" class="hidden flex flex-col items-center">
+                <span id="file-name" class="text-sm font-medium text-white mb-1"></span>
+                <span id="file-size" class="text-xs text-zinc-400 mb-4"></span>
+                
+                <div class="flex gap-4 items-start w-full max-w-sm bg-black p-3 rounded border border-zinc-800 text-left">
+                  <div id="thumb-preview" class="h-16 w-24 bg-zinc-800 flex items-center justify-center text-xs text-zinc-500 overflow-hidden"></div>
+                  <div class="flex-1">
+                    <button onclick="document.getElementById('thumb-input').click()" class="text-xs bg-zinc-800 px-2 py-1 rounded hover:bg-zinc-700 text-white">Change Thumbnail</button>
+                    <input type="file" id="thumb-input" class="hidden" accept="image/*">
+                  </div>
+                </div>
+
+                <button id="remove-file-btn" class="mt-4 text-xs text-red-500 hover:underline">Remove file</button>
+              </div>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+              <button id="upload-btn" disabled class="py-2 px-6 rounded-md font-bold text-black bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed">Upload</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Watch View -->
+        <div id="watch-view" class="hidden">
+          <div class="flex flex-col lg:flex-row gap-6 max-w-[1800px] mx-auto">
+            <div id="watch-content" class="flex-1 min-w-0"></div>
+            <div id="watch-recommendations" class="w-full lg:w-[400px] flex-shrink-0 space-y-3"></div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Delete Modal -->
+    <div id="delete-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+      <div class="bg-zinc-900 rounded-xl shadow-xl w-full max-w-sm p-6 border border-zinc-800">
+        <h3 class="text-lg font-bold text-white mb-2">Delete Media?</h3>
+        <p class="text-zinc-400 mb-4 text-sm">Enter admin PIN (@Pass1151) to confirm.</p>
+        <input type="password" id="delete-pin-input" class="w-full px-4 py-2 bg-black border border-zinc-700 text-white rounded-lg focus:outline-none focus:border-orange-500 mb-4" placeholder="PIN">
+        <div class="flex justify-end gap-3">
+          <button id="cancel-delete" class="px-4 py-2 text-zinc-400 hover:bg-zinc-800 rounded-lg">Cancel</button>
+          <button id="confirm-delete" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Overlay -->
+    <div id="error-overlay" style="display: none; position: fixed; inset: 0; background: #000; z-index: 9999; padding: 20px; color: red; font-family: monospace; overflow: auto;">
+      <h2 style="color: white; font-size: 20px; margin-bottom: 10px;">Something went wrong</h2>
+      <pre id="error-message" style="white-space: pre-wrap;"></pre>
+      <button onclick="window.location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer;">Reload Page</button>
+    </div>
+
+    <script>
+      window.onerror = function(msg, url, line, col, error) {
+        document.getElementById('error-overlay').style.display = 'block';
+        document.getElementById('error-message').textContent = msg + '\n\n' + (error ? error.stack : '');
+        return false;
+      };
+      window.onunhandledrejection = function(e) {
+        document.getElementById('error-overlay').style.display = 'block';
+        document.getElementById('error-message').textContent = 'Unhandled Rejection: ' + (e.reason ? (e.reason.message || e.reason) : e.reason);
+      };
+    </script>
+
+    <!-- DB Logic -->
+    <script>
+        const DB_NAME = 'my-stream-db';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'media';
+        let dbInstance = null;
+
+        function openDB() {
+          return new Promise((resolve, reject) => {
+            if (dbInstance) return resolve(dbInstance);
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            request.onerror = (event) => { console.error('IndexedDB error:', event.target.error); reject(event.target.error); };
+            request.onsuccess = (event) => { dbInstance = event.target.result; resolve(dbInstance); };
+            request.onupgradeneeded = (event) => {
+              const db = event.target.result;
+              if (!db.objectStoreNames.contains(STORE_NAME)) {
+                const store = db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                store.createIndex('by-date', 'createdAt');
+              }
+            };
+          });
+        }
+        function getStore(mode) {
+          return openDB().then((db) => {
+            const transaction = db.transaction(STORE_NAME, mode);
+            return transaction.objectStore(STORE_NAME);
+          });
+        }
+        function promisifyRequest(request) {
+          return new Promise((resolve, reject) => {
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+          });
+        }
+        const db = {
+          async addMedia(item) {
+            try { const store = await getStore('readwrite'); return await promisifyRequest(store.put(item)); } catch (e) { console.error('Error adding media:', e); throw e; }
+          },
+          async getAllMedia() {
+            try { const store = await getStore('readonly'); const index = store.index('by-date'); return await promisifyRequest(index.getAll()); } catch (e) { console.error('Error getting all media:', e); return []; }
+          },
+          async getMedia(id) {
+            try { const store = await getStore('readonly'); return await promisifyRequest(store.get(id)); } catch (e) { console.error('Error getting media:', e); return undefined; }
+          },
+          async deleteMedia(id) {
+            try { const store = await getStore('readwrite'); return await promisifyRequest(store.delete(id)); } catch (e) { console.error('Error deleting media:', e); throw e; }
+          },
+        };
+    </script>
+
+    <!-- Thumbnail Logic -->
+    <script>
+        function generateThumbnail(file) {
+          return new Promise((resolve, reject) => {
+            const isVideo = file.type.startsWith('video/');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            if (!ctx) { reject(new Error('Failed to get canvas context')); return; }
+
+            if (isVideo) {
+              const video = document.createElement('video');
+              video.muted = true;
+              video.playsInline = true;
+              video.crossOrigin = 'anonymous';
+              const timeoutId = setTimeout(() => { if (video.src) URL.revokeObjectURL(video.src); reject(new Error('Thumbnail generation timed out')); }, 5000); 
+              const cleanup = () => { clearTimeout(timeoutId); if (video.src) URL.revokeObjectURL(video.src); };
+              video.onloadedmetadata = () => {
+                 if (video.duration === Infinity || isNaN(video.duration)) { video.currentTime = 1; } else if (video.duration < 1) { video.currentTime = video.duration / 2; } else { video.currentTime = 1; }
+              };
+              video.onseeked = () => {
+                try {
+                  const maxWidth = 320;
+                  const scale = maxWidth / video.videoWidth;
+                  canvas.width = maxWidth;
+                  canvas.height = video.videoHeight * scale;
+                  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                  const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                  cleanup(); resolve(dataUrl);
+                } catch (e) { cleanup(); reject(e); }
+              };
+              video.onerror = () => { cleanup(); reject(new Error('Error loading video')); };
+              video.src = URL.createObjectURL(file);
+              video.load();
+            } else {
+              const img = new Image();
+              const timeoutId = setTimeout(() => { if (img.src) URL.revokeObjectURL(img.src); reject(new Error('Image load timed out')); }, 5000);
+              const cleanup = () => { clearTimeout(timeoutId); if (img.src) URL.revokeObjectURL(img.src); };
+              img.onload = () => {
+                try {
+                  const maxSize = 320;
+                  let width = img.width;
+                  let height = img.height;
+                  if (width > height) { if (width > maxSize) { height *= maxSize / width; width = maxSize; } } else { if (height > maxSize) { width *= maxSize / height; height = maxSize; } }
+                  canvas.width = width;
+                  canvas.height = height;
+                  ctx.drawImage(img, 0, 0, width, height);
+                  const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                  cleanup(); resolve(dataUrl);
+                } catch (e) { cleanup(); reject(e); }
+              };
+              img.onerror = () => { cleanup(); reject(new Error('Error loading image')); };
+              img.src = URL.createObjectURL(file);
+            }
+          });
+        }
+    </script>
+
+    <!-- App Logic -->
+    <script>
+        const app = document.getElementById('app');
+        const views = {
+          home: document.getElementById('home-view'),
+          photos: document.getElementById('photos-view'),
+          upload: document.getElementById('upload-view'),
+          watch: document.getElementById('watch-view'),
+        };
+        const uploadState = { file: null, thumbnailUrl: null, uploading: false };
+
+        window.addEventListener('hashchange', safeRouter);
+        window.addEventListener('DOMContentLoaded', safeRouter);
+
+        async function safeRouter() {
+          try { await router(); } catch (error) { console.error("Router Error:", error); window.dispatchEvent(new ErrorEvent('error', { error, message: error.message })); }
+        }
+
+        async function router() {
+          const hash = window.location.hash || '#/';
+          hideAllViews();
+          updateSidebar(hash);
+
+          if (hash === '#/' || hash === '') { await renderHome(); } 
+          else if (hash === '#/photos') { await renderPhotos(); } 
+          else if (hash === '#/upload') { renderUpload(); } 
+          else if (hash.startsWith('#/view/')) { const id = hash.split('/')[2]; if (id) { await renderView(id); } else { window.location.hash = '#/'; } } 
+          else { await renderHome(); }
+        }
+
+        function hideAllViews() { Object.values(views).forEach(el => { if (el) el.classList.add('hidden'); }); }
+        function showView(name) { if (views[name]) views[name].classList.remove('hidden'); }
+        function updateSidebar(hash) {
+          document.querySelectorAll('.sidebar-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === hash || (hash === '' && href === '#/')) {
+              link.classList.add('bg-orange-500', 'text-black');
+              link.classList.remove('text-zinc-400', 'hover:bg-zinc-800');
+            } else {
+              link.classList.remove('bg-orange-500', 'text-black');
+              link.classList.add('text-zinc-400', 'hover:bg-zinc-800');
+            }
+          });
+        }
+
+        async function renderHome() {
+          showView('home');
+          const container = document.getElementById('home-grid');
+          if (!container) return;
+          container.innerHTML = '<div class="col-span-full text-center py-10"><div class="h-8 w-8 animate-spin rounded-full border-4 border-orange-500 border-t-transparent inline-block"></div></div>';
+          try {
+            const allMedia = await db.getAllMedia();
+            const videos = allMedia.filter(m => m.type === 'video').sort((a, b) => b.createdAt - a.createdAt);
+            if (videos.length === 0) {
+              container.innerHTML = '<div class="col-span-full flex flex-col items-center justify-center min-h-[50vh] text-center space-y-4"><div class="bg-zinc-800 p-6 rounded-full"><svg class="h-12 w-12 text-orange-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div><h2 class="text-2xl font-semibold text-white">No videos yet</h2><p class="text-zinc-400 max-w-sm">Start by uploading some videos.</p><a href="#/upload" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black bg-orange-500 hover:bg-orange-600 focus:outline-none">Upload Video</a></div>';
+              return;
+            }
+            container.innerHTML = videos.map(item => createMediaCard(item)).join('');
+          } catch (e) { console.error(e); container.innerHTML = '<div class="col-span-full text-center py-10 text-red-500">Failed to load videos.</div>'; }
+        }
+
+        async function renderPhotos() {
+          showView('photos');
+          const container = document.getElementById('photos-grid');
+          if (!container) return;
+          container.innerHTML = '<div class="col-span-full text-center py-10"><div class="h-8 w-8 animate-spin rounded-full border-4 border-orange-500 border-t-transparent inline-block"></div></div>';
+          try {
+            const allMedia = await db.getAllMedia();
+            const photos = allMedia.filter(m => m.type === 'image').sort((a, b) => b.createdAt - a.createdAt);
+            if (photos.length === 0) {
+              container.innerHTML = '<div class="col-span-full flex flex-col items-center justify-center min-h-[50vh] text-center space-y-4"><div class="bg-zinc-800 p-6 rounded-full"><svg class="h-12 w-12 text-orange-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div><h2 class="text-2xl font-semibold text-white">No photos yet</h2><p class="text-zinc-400 max-w-sm">Start by uploading some photos.</p><a href="#/upload" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-black bg-orange-500 hover:bg-orange-600 focus:outline-none">Upload Photo</a></div>';
+              return;
+            }
+            container.innerHTML = photos.map(item => createMediaCard(item)).join('');
+          } catch (e) { console.error(e); container.innerHTML = '<div class="col-span-full text-center py-10 text-red-500">Failed to load photos.</div>'; }
+        }
+
+        function createMediaCard(item) {
+          const timeAgo = formatTimeAgo(item.createdAt);
+          const thumbnail = item.thumbnail;
+          let thumbnailHtml;
+          if (thumbnail) { thumbnailHtml = `<img src="${thumbnail}" alt="${item.title}" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity" />`; } else { thumbnailHtml = `<div class="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-xs">No Preview</div>`; }
+          const playIcon = item.type === 'video' ? `<div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/0 transition-colors pointer-events-none"><svg class="h-12 w-12 text-white opacity-80 group-hover:opacity-100 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>` : '';
+          return `<a href="#/view/${item.id}" class="group flex flex-col cursor-pointer mb-6"><div class="aspect-video bg-zinc-800 rounded-lg relative overflow-hidden mb-3 border border-zinc-800 group-hover:border-orange-500 transition-colors">${thumbnailHtml}${playIcon}</div><div class="flex gap-3 px-1"><div class="flex-shrink-0"><div class="h-9 w-9 rounded-full bg-orange-500 flex items-center justify-center text-black font-bold text-sm">A</div></div><div class="flex flex-col flex-1 min-w-0"><h3 class="text-base font-semibold text-white line-clamp-2 leading-tight group-hover:text-orange-500 transition-colors">${item.title}</h3><div class="mt-1 text-sm text-zinc-400 flex items-center"><span>Ax viral24</span><svg class="h-3 w-3 ml-1 text-zinc-500 fill-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="text-sm text-zinc-400">${Math.floor(Math.random() * 1000)}K views • ${timeAgo}</div></div></div></a>`;
+        }
+
+        // --- Upload Logic ---
+        const pinForm = document.getElementById('pin-form');
+        const uploadForm = document.getElementById('upload-form');
+        const pinInput = document.getElementById('pin-input');
+        const fileInput = document.getElementById('file-input');
+        const thumbInput = document.getElementById('thumb-input');
+        const dropZone = document.getElementById('drop-zone');
+        const uploadBtn = document.getElementById('upload-btn');
+        const removeFileBtn = document.getElementById('remove-file-btn');
+        const videoUploadBtn = document.getElementById('upload-video-btn');
+        const photoUploadBtn = document.getElementById('upload-photo-btn');
+        const pinSubmitBtn = document.getElementById('pin-submit');
+
+        function renderUpload() {
+          showView('upload');
+          const isAuth = localStorage.getItem('upload_auth') === 'true';
+          if (isAuth) { if (pinForm) pinForm.classList.add('hidden'); if (uploadForm) uploadForm.classList.remove('hidden'); } 
+          else { if (pinForm) pinForm.classList.remove('hidden'); if (uploadForm) uploadForm.classList.add('hidden'); }
+        }
+
+        if (pinSubmitBtn) { pinSubmitBtn.addEventListener('click', (e) => { e.preventDefault(); if (pinInput.value === '@Pass1151') { localStorage.setItem('upload_auth', 'true'); renderUpload(); } else { alert('Incorrect PIN'); } }); }
+        if (videoUploadBtn) { videoUploadBtn.addEventListener('click', () => { fileInput.setAttribute('accept', 'video/*'); fileInput.click(); }); }
+        if (photoUploadBtn) { photoUploadBtn.addEventListener('click', () => { fileInput.setAttribute('accept', 'image/*'); fileInput.click(); }); }
+        if (fileInput) { fileInput.addEventListener('change', handleFileSelect); }
+        if (thumbInput) { thumbInput.addEventListener('change', handleThumbSelect); }
+        if (dropZone) { dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-orange-500'); }); dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('border-orange-500'); }); dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('border-orange-500'); if (e.dataTransfer.files[0]) handleFileSelect({ target: { files: e.dataTransfer.files } }); }); }
+
+        async function handleFileSelect(e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          if (file.size > 500 * 1024 * 1024) { alert('File too large (max 500MB)'); return; }
+          uploadState.file = file;
+          document.getElementById('file-name').textContent = file.name;
+          document.getElementById('file-size').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+          document.getElementById('file-preview').classList.remove('hidden');
+          document.getElementById('drop-message').classList.add('hidden');
+          uploadBtn.disabled = false;
+          document.getElementById('thumb-preview').innerHTML = 'Generating...';
+          try { const url = await generateThumbnail(file); uploadState.thumbnailUrl = url; document.getElementById('thumb-preview').innerHTML = `<img src="${url}" class="w-full h-full object-cover">`; } catch (err) { console.warn(err); document.getElementById('thumb-preview').textContent = 'Failed to generate'; }
+        }
+
+        if (removeFileBtn) { removeFileBtn.addEventListener('click', (e) => { e.stopPropagation(); uploadState.file = null; uploadState.thumbnailUrl = null; fileInput.value = ''; document.getElementById('file-preview').classList.add('hidden'); document.getElementById('drop-message').classList.remove('hidden'); uploadBtn.disabled = true; }); }
+        async function handleThumbSelect(e) { const file = e.target.files[0]; if (!file) return; try { const url = await generateThumbnail(file); uploadState.thumbnailUrl = url; document.getElementById('thumb-preview').innerHTML = `<img src="${url}" class="w-full h-full object-cover">`; } catch (err) { alert('Invalid image'); } }
+        if (uploadBtn) { uploadBtn.addEventListener('click', async () => { if (!uploadState.file) return; uploadBtn.textContent = 'Uploading...'; uploadBtn.disabled = true; try { const file = uploadState.file; const type = file.type.startsWith('video/') ? 'video' : 'image'; const id = Date.now().toString(36) + Math.random().toString(36).substr(2); await db.addMedia({ id, title: file.name, type, mimeType: file.type, blob: file, thumbnail: uploadState.thumbnailUrl, createdAt: Date.now(), }); window.location.hash = '#/'; removeFileBtn.click(); } catch (err) { console.error(err); alert(err.name === 'QuotaExceededError' ? 'Storage full!' : 'Upload failed'); } finally { uploadBtn.textContent = 'Upload'; uploadBtn.disabled = false; } }); }
+
+        // --- View Logic ---
+        const deleteModal = document.getElementById('delete-modal');
+        const deleteInput = document.getElementById('delete-pin-input');
+        const cancelDeleteBtn = document.getElementById('cancel-delete');
+        const confirmDeleteBtn = document.getElementById('confirm-delete');
+        let currentViewId = null;
+
+        async function renderView(id) {
+          showView('watch');
+          currentViewId = id;
+          const container = document.getElementById('watch-content');
+          const recommendations = document.getElementById('watch-recommendations');
+          if (!container || !recommendations) return;
+          container.innerHTML = '<div class="flex justify-center p-10"><div class="h-8 w-8 animate-spin rounded-full border-4 border-orange-500 border-t-transparent"></div></div>';
+          recommendations.innerHTML = '';
+          try {
+            const item = await db.getMedia(id);
+            if (!item) { window.location.hash = '#/'; return; }
+            let url; try { url = URL.createObjectURL(item.blob); } catch(e) { console.error("Failed to create object URL", e); container.innerHTML = '<div class="text-red-500 p-10 text-center">Failed to load media file. It might be corrupted.</div>'; return; }
+            const mediaContent = item.type === 'video' ? `<video src="${url}" controls autoplay class="w-full h-full rounded-lg bg-black"></video>` : `<img src="${url}" class="w-full h-full object-contain rounded-lg bg-black">`;
+            container.innerHTML = `<div class="aspect-video bg-black rounded-xl shadow-lg mb-4 flex items-center justify-center">${mediaContent}</div><h1 class="text-xl font-bold text-white mb-2 line-clamp-2">${item.title}</h1><div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-zinc-800 pb-4"><div class="flex items-center gap-3"><div class="h-10 w-10 rounded-full bg-orange-500 flex items-center justify-center text-black font-bold">A</div><div><h3 class="font-semibold text-white">Ax viral24</h3><p class="text-xs text-zinc-400">1.2M subscribers</p></div><button class="ml-4 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-full text-sm font-bold">Subscribe</button></div><div class="flex gap-2"><a href="${url}" download="${item.title}" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-full text-sm font-medium flex items-center gap-2"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a><button id="trigger-delete-btn" class="px-4 py-2 bg-zinc-800 hover:bg-red-900/50 text-red-500 rounded-full text-sm font-medium flex items-center gap-2"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Delete</button></div></div><div class="mt-4 bg-zinc-900 p-4 rounded-xl text-sm border border-zinc-800"><p class="text-zinc-300">Published on ${new Date(item.createdAt).toLocaleDateString()}</p><p class="text-zinc-400 mt-2">Private video uploaded to Ax viral24.</p></div>`;
+            document.getElementById('trigger-delete-btn').addEventListener('click', () => { if(deleteModal) deleteModal.classList.remove('hidden'); });
+            const all = await db.getAllMedia();
+            const recs = all.filter(m => m.id !== id).sort(() => 0.5 - Math.random()).slice(0, 10);
+            recommendations.innerHTML = recs.map(r => `<a href="#/view/${r.id}" class="flex gap-2 group cursor-pointer mb-3"><div class="w-40 aspect-video bg-zinc-800 rounded-lg overflow-hidden flex-shrink-0 border border-zinc-800 group-hover:border-orange-500 relative">${r.thumbnail ? `<img src="${r.thumbnail}" class="w-full h-full object-cover">` : '<div class="w-full h-full flex items-center justify-center text-xs text-zinc-500">No Preview</div>'}${r.type === 'video' ? '<div class="absolute bottom-1 right-1 bg-black/80 px-1 py-0.5 rounded text-[10px] text-white font-bold">12:34</div>' : ''}</div><div class="min-w-0"><h4 class="font-semibold text-sm text-white line-clamp-2 leading-tight group-hover:text-orange-500">${r.title}</h4><div class="text-xs text-zinc-400 mt-1">Ax viral24</div></div></a>`).join('');
+          } catch (e) { console.error(e); container.innerHTML = '<div class="text-red-500 p-10">Failed to load view.</div>'; }
+        }
+
+        if (cancelDeleteBtn) { cancelDeleteBtn.addEventListener('click', () => { deleteModal.classList.add('hidden'); deleteInput.value = ''; }); }
+        if (confirmDeleteBtn) { confirmDeleteBtn.addEventListener('click', async () => { if (deleteInput.value === '@Pass1151') { try { await db.deleteMedia(currentViewId); deleteModal.classList.add('hidden'); deleteInput.value = ''; window.location.hash = '#/'; } catch (e) { alert('Delete failed'); } } else { alert('Incorrect PIN'); } }); }
+
+        function formatTimeAgo(timestamp) {
+            const seconds = Math.floor((Date.now() - timestamp) / 1000);
+            let interval = seconds / 31536000;
+            if (interval > 1) return Math.floor(interval) + (Math.floor(interval) === 1 ? " year ago" : " years ago");
+            interval = seconds / 2592000;
+            if (interval > 1) return Math.floor(interval) + (Math.floor(interval) === 1 ? " month ago" : " months ago");
+            interval = seconds / 86400;
+            if (interval > 1) return Math.floor(interval) + (Math.floor(interval) === 1 ? " day ago" : " days ago");
+            interval = seconds / 3600;
+            if (interval > 1) return Math.floor(interval) + (Math.floor(interval) === 1 ? " hour ago" : " hours ago");
+            interval = seconds / 60;
+            if (interval > 1) return Math.floor(interval) + (Math.floor(interval) === 1 ? " minute ago" : " minutes ago");
+            return Math.floor(seconds) + (Math.floor(seconds) === 1 ? " second ago" : " seconds ago");
+        }
+
+        // Sidebar Mobile Toggle
+        const sidebar = document.getElementById('sidebar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileBackdrop = document.getElementById('mobile-backdrop');
+        function toggleSidebar() { if (sidebar) sidebar.classList.toggle('-translate-x-full'); if (mobileBackdrop && window.innerWidth < 1024) { mobileBackdrop.classList.toggle('hidden'); } }
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
+        if (mobileBackdrop) mobileBackdrop.addEventListener('click', toggleSidebar);
+        document.querySelectorAll('.sidebar-link').forEach(link => { link.addEventListener('click', () => { if (window.innerWidth < 1024 && sidebar) { sidebar.classList.add('-translate-x-full'); if (mobileBackdrop) mobileBackdrop.classList.add('hidden'); } }); });
+    </script>
+  </body>
+</html>
